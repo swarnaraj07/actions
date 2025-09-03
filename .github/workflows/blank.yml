@@ -1,0 +1,16 @@
+name: Triggered Workflow
+
+on:
+  repository_dispatch:
+    types: [manual-trigger]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Example step
+        run: echo "GitHub Action triggered by Spring Boot"
