@@ -1,16 +1,15 @@
-name: Triggered Workflow
+name: CI on Pub/Sub Trigger
 
 on:
-  repository_dispatch:
-    types: [manual-trigger]
+  workflow_dispatch:
+    inputs:
+      pubsub_message:
+        description: "Message from Pub/Sub"
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Example step
-        run: echo "GitHub Action triggered by Spring Boot"
+      - name: Print message
+        run: echo "Triggered by Pub/Sub: ${{ github.event.inputs.pubsub_message }}"
